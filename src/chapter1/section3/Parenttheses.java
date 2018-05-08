@@ -33,6 +33,13 @@ public class Parenttheses {
             return item;
         }
 
+        public Item peek() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            return first.item;
+        }
+
         public boolean isEmpty() {
             return first == null;
         }
