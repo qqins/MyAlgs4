@@ -17,6 +17,7 @@ public class InfixToPostfix {
 
     /**
      * 将中序表达式转为后序表达式
+     * 结果为：2 3 * 2 1 - / 3 4 1 - * +
      */
     public static void infixToPostfix() {
         String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
@@ -25,18 +26,12 @@ public class InfixToPostfix {
         StringBuffer sb = new StringBuffer();
         for (String s : strings) {
             if (s.equals("(")) {
-            } else if (s.equals("+")) {
-                sta.push("+");
-            } else if (s.equals("-")) {
-                sta.push("-");
-            } else if (s.equals("*")) {
-                sta.push("*");
-            } else if (s.equals("/")) {
-                sta.push("/");
             } else if (s.equals(")")) {
                 sb.append(sta.pop() + " ");
-            } else {
+            } else if (ISNUMBER.matcher(s).matches()) {
                 sb.append(s + " ");
+            } else {
+                sta.push(s);
             }
         }
         System.out.println(sb.toString());
@@ -44,6 +39,7 @@ public class InfixToPostfix {
 
     /**
      * 将后序表达式转为中序表达式
+     * 结果为：(((2*3)/(2-1))+(3*(4-1)))
      */
     public static void postFixToInfix() {
         String str = "2 3 * 2 1 - / 3 4 1 - * +";
@@ -64,8 +60,8 @@ public class InfixToPostfix {
 
     /**
      * 将中序表达式转为前序表达式
-     * 首先将其反转
-     * +/*23-21*3-41
+     * 首先将其反转，将运算符压栈，遇到（就弹出
+     * 结果为：+/*23-21*3-41
      */
     public static void infixToPrefix() {
         String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
@@ -99,6 +95,7 @@ public class InfixToPostfix {
 
     /**
      * 将前序表达式转为中序表达式
+     * 结果为：(((2*3)/(2-1))+(3*(4-1)))
      */
     public static void preFixToInfix() {
         String str = "+ / * 2 3 - 2 1 * 3 - 4 1";
@@ -123,6 +120,6 @@ public class InfixToPostfix {
     }
 
     public static void main(String[] args) {
-        preFixToInfix();
+        infixToPostfix();
     }
 }
