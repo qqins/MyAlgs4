@@ -3,6 +3,10 @@ package chapter1.section3;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
+/**
+ * @author Hello World
+ * @date 2018.5.8
+ */
 public class EvaluatePostfix {
     private static Pattern ISNUMBER = Pattern.compile("[0-9]+");
 
@@ -13,7 +17,6 @@ public class EvaluatePostfix {
         String str = "2 3 * 2 1 - / 3 4 1 - * +";
         String[] strings = str.split("\\s+");
         Stack<Integer> sta = new Stack<>();
-        int result = 0;
         for (String s : strings) {
             if (ISNUMBER.matcher(s).matches()) {
                 sta.push(Integer.parseInt(s));

@@ -1,0 +1,63 @@
+<Configuration status="WARN">
+    <properties>
+        <property name="LOG_HOME">D:\JavaCode\Algorithms\log</property>
+        <property name="FILE_NAME">mylog</property>
+        <property name="log.sql.level">info</property>
+    </properties>
+
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--
+             %d{HH:mm:ss.SSS} 表示输出到毫秒的时间
+             %t 输出当前线程名称
+             %-5level 输出日志级别，-5表示左对齐并且固定输出5个字符，如果不足在右边补0
+             %logger 输出logger名称，因为Root Logger没有名称，所以没有输出
+             %msg 日志文本
+             %n 换行
+
+            其他常用的占位符有：
+             %F 输出所在的类文件名，如Log4j2Test.java
+             %L 输出行号
+             %M 输出所在方法名
+             %l 输出语句所在的行数, 包括类名、方法名、文件名、行数-->
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n" />
+        </Console>
+
+        <!--RollingRandomAccessFile: 该输出源也是写入到文件，不同的是比File更加强大，
+            可以指定当文件达到一定大小（如20MB）时，另起一个文件继续写入日志，另起一个文
+            件就涉及到新文件的名字命名规则，因此需要配置文件命名规则-->
+        <!--fileName 指定当前日志文件的位置和文件名称-->
+        <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
+            <Policies>
+                <!--TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用，
+                    注意filePattern中配置的文件重命名规则是${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i，
+                    最小的时间粒度是mm，即分钟，即调试间隔一分钟会生成一个新文件，若调试间隔不足一分钟，
+                    则将内容追加到当前文件-->
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <!--SizeBasedTriggeringPolicy 指定当文件体积大于size指定的值时，将重新
+                    生成一个新文件，若一分钟内有200M的信息，则会产生10个文件，若两分钟才100K信息，
+                    由于每分钟要自动生成新文件，此时就会有两个文件
+                    -->
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <!--如果一分钟有4000M的信息，则这分钟内只会生成100个文件，后面的100个不会生成-->
+            <DefaultRolloverStrategy max="100"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- trace<debug<info<warn<error<fatal -->
+        <!-- 默认的输出级别 -->
+        <Root level="trace">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingRandomAccessFile" />
+        </Root>
+
+        <Logger name="com.mengdee.dao" level="${log.sql.level}" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+    </Loggers>
+</Configuration>

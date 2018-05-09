@@ -75,7 +75,9 @@ public class Parenttheses {
         }
     }
 
-    //1.3.4
+    /**
+     *1.3.4
+     */
     public static boolean isComplete(String str) {
         if (str.length() == 0) {
             return false;
@@ -123,7 +125,9 @@ public class Parenttheses {
         return sta.isEmpty();
     }
 
-    //1.3.9
+    /**
+     * 1.3.9
+     */
     public static void completion() {
         String str = "1 + 2 ) * 3 - 4 ) * 5 - 6 ) ) )";
         String[] strings = str.split("\\s+");
