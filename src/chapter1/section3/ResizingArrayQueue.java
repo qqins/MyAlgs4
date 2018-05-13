@@ -22,9 +22,6 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
         return N;
     }
 
-    public int arrayLength() {
-        return a.length;
-    }
     private void resize(int max) {
         Item[] temp = (Item[]) new Object[max];
         for (int i = 0; i < N; i++) {
