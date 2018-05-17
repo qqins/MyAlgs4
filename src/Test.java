@@ -1,18 +1,15 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Test {
+    private static final Logger logger = LoggerFactory.getLogger(Test.class.getName());
+
     public static void main(String[] args) {
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(1, 2);
-        map.put(1, 3);
-        Iterator iterator=map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry entry=(Map.Entry)iterator.next();
-            Object key=entry.getKey();
-            System.out.println(key);
-            Object value=entry.getValue();
-            System.out.println(value);
-        }
+        logger.trace("trace");
+        logger.debug("debug");
+        logger.info("ingo");
+        logger.warn("warn");
+        logger.error("error");
     }
 }

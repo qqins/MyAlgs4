@@ -21,7 +21,7 @@
              %L 输出行号
              %M 输出所在方法名
              %l 输出语句所在的行数, 包括类名、方法名、文件名、行数-->
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n" />
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %M - %msg%n" />
         </Console>
 
         <!--RollingRandomAccessFile: 该输出源也是写入到文件，不同的是比File更加强大，
@@ -29,7 +29,7 @@
             件就涉及到新文件的名字命名规则，因此需要配置文件命名规则-->
         <!--fileName 指定当前日志文件的位置和文件名称-->
         <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log"
-                                 filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">
+                                 filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
             <Policies>
                 <!--TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用，
