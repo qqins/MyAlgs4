@@ -6,10 +6,17 @@ public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class.getName());
 
     public static void main(String[] args) {
-        logger.trace("trace");
-        logger.debug("debug");
-        logger.info("ingo");
-        logger.warn("warn");
-        logger.error("error");
+        String string = "abcdef";
+        boolean flag = true;
+        char[] chars = string.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            int x = string.indexOf(chars[i]);
+            if (x != i) {
+                flag = false;
+                break;
+            }
+        }
+        System.out.println(flag);
+        System.out.println("".length());
     }
 }
