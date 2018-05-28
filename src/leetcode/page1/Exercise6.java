@@ -3,7 +3,8 @@ package leetcode.page1;
 /**
  * @author: Hello World
  * @date: 2018/5/24 19:57
- * <p>
+ *
+ * 6. Z字形变换
  * 将字符串 "PAYPALISHIRING" 以Z字形排列成给定的行数：
  * <p>
  * P   A   H   N

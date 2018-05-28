@@ -1,6 +1,8 @@
 package chapter2.section1.example;
 
 
+import java.util.Arrays;
+
 /**
  * @author: Hello World
  * @date: 2018/5/23 21:38
@@ -60,22 +62,26 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        Double[] a = new Double[10000];
-        Double[] b = new Double[10000];
+        Double[] a = new Double[1000];
+        Double[] b = new Double[1000];
         for (int i = 0; i < a.length; i++) {
             a[i] = Math.random();
             b[i] = a[i];
         }
 
         long start = System.currentTimeMillis();
+        System.out.println(Arrays.toString(a));
         sort3(a);
         System.out.println("插入排序所用时间为：");
         System.out.println(System.currentTimeMillis() - start);
+        System.out.println(Arrays.toString(a));
 
         long start1 = System.currentTimeMillis();
+        System.out.println(Arrays.toString(b));
         Selection.sort(b);
         System.out.println("选择排序所用时间为：");
         System.out.println(System.currentTimeMillis() - start1);
+        System.out.println(Arrays.toString(b));
 
     }
 }

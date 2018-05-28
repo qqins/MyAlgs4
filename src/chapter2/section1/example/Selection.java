@@ -20,9 +20,9 @@ public class Selection {
                     min = j;
                 }
             }
-            if (min != i) {
+//            if (min != i) {
                 exch(a, i, min);
-            }
+//            }
         }
     }
 
