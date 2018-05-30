@@ -83,8 +83,28 @@ public class Exercise7 {
         }
     }
 
+    public static int reverse3(int x) {
+        long y = 0;
+        int t = x;
+        if (t < 0) {
+            t = Math.abs(t);
+        }
+        while (t > 0) {
+            y = y * 10 + t % 10;
+            t = t / 10;
+        }
+        if (x < 0) {
+            y = -1 * y;
+        }
+        if (y > Integer.MAX_VALUE || y < Integer.MIN_VALUE) {
+            return 0;
+        } else {
+            return (int) y;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(reverse(-2147483648));
-        System.out.println(reverse1(-2147483648));
+        System.out.println(reverse3(-120));
     }
 }
