@@ -1,8 +1,5 @@
-package chapter1.section3;
+package algorithms4.chapter1.section3;
 
-
-import edu.princeton.cs.algs4.ST;
-import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Arrays;
 import java.util.Stack;

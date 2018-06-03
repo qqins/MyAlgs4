@@ -1,4 +1,4 @@
-package chapter1.section3;
+package algorithms4.chapter1.section3;
 
 import java.util.ArrayDeque;
 import java.util.Iterator;

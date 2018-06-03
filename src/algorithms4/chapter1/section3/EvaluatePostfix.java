@@ -1,4 +1,4 @@
-package chapter1.section3;
+package algorithms4.chapter1.section3;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
