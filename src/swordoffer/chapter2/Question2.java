@@ -8,6 +8,8 @@ package swordoffer.chapter2;
  * 设计一个类，我们只能生产该类的一个实例
  * <p>
  * 静态方法与静态内部类只有被调用时才会加载
+ *
+ * 参考: https://itimetraveler.github.io/2016/09/08/%E3%80%90Java%E3%80%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/
  */
 public class Question2 {
     public static void main(String[] args) {
