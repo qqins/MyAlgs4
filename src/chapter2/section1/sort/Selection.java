@@ -1,10 +1,13 @@
-package chapter2.section1.example;
+package chapter2.section1.sort;
 
 import java.util.Arrays;
 
 /**
  * @author: Hello World
  * @date: 2018/5/23 20:55
+ *
+ * 排序类型	平均情况	最好情况	最坏情况	辅助空间	稳定性
+ * 选择排序	O(n²)	O(n²)	O(n²)	O(1)	不稳定
  */
 public class Selection {
     /**
@@ -16,6 +19,9 @@ public class Selection {
         for (int i = 0; i < a.length; i++) {
             int min = i;
             for (int j = i + 1; j < a.length; j++) {
+                /**
+                 * a[j]<a[min]
+                 */
                 if (less(a[j], a[min])) {
                     min = j;
                 }
@@ -32,7 +38,7 @@ public class Selection {
 
     private static void exch(Comparable[] a, int i, int j) {
         Comparable t = a[i];
-        a[i] = a[j];
+        Comparable comparable = a[i] = a[j];
         a[j] = t;
     }
 

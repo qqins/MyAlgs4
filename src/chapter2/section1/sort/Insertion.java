@@ -1,11 +1,15 @@
-package chapter2.section1.example;
+package chapter2.section1.sort;
 
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @author: Hello World
  * @date: 2018/5/23 21:38
+ * <p>
+ * 排序类型	平均情况	最好情况	最坏情况	辅助空间	稳定性
+ * 插入排序	O(n²)	O(n)	O(n²)	O(1)	稳定
  */
 public class Insertion {
     /**
@@ -13,6 +17,14 @@ public class Insertion {
      *
      * @param a
      */
+    public static void sort(Comparable[] a) {
+        for (int i = 1; i < a.length; i++) {
+            for (int j = i; j > 0 && (less(a[j], a[j - 1])); j--) {
+                exch(a, j, j - 1);
+            }
+        }
+    }
+
     public static void sort1(int[] a) {
         for (int i = 0; i < a.length - 1; i++) {
             /**
@@ -43,14 +55,6 @@ public class Insertion {
         }
     }
 
-    public static void sort3(Comparable[] a) {
-        for (int i = 0; i < a.length - 1; i++) {
-            for (int j = i + 1; j > 0 && (less(a[j], a[j - 1])); j--) {
-                exch(a, j, j - 1);
-            }
-        }
-    }
-
     private static boolean less(Comparable w, Comparable v) {
         return w.compareTo(v) < 0;
     }
@@ -62,16 +66,18 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        Double[] a = new Double[1000];
-        Double[] b = new Double[1000];
+        Integer[] a = new Integer[10000];
+        Integer[] b = new Integer[10000];
+        Random randomInt=new Random();
         for (int i = 0; i < a.length; i++) {
-            a[i] = Math.random();
-            b[i] = a[i];
+            b[i] = randomInt.nextInt(10000);
         }
-
+        for (int i = 0; i < a.length; i++) {
+            a[i]=i;
+        }
         long start = System.currentTimeMillis();
         System.out.println(Arrays.toString(a));
-        sort3(a);
+        sort(a);
         System.out.println("插入排序所用时间为：");
         System.out.println(System.currentTimeMillis() - start);
         System.out.println(Arrays.toString(a));
