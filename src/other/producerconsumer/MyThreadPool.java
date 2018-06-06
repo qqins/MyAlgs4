@@ -98,4 +98,8 @@ public class MyThreadPool {
     public void shutdownNow() {
         mExecutor.shutdownNow();
     }
+
+    public void shutdown() {
+        mExecutor.shutdown();
+    }
 }

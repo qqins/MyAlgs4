@@ -10,7 +10,6 @@ public class Test {
     private static final Logger logger = LoggerFactory.getLogger(Test.class.getName());
 
     public static void main(String[] args) {
-        Map<Integer, Integer> map = new HashMap<>();
-        System.out.println(map.get(1));
+        System.out.println(Runtime.getRuntime().availableProcessors());
     }
 }
