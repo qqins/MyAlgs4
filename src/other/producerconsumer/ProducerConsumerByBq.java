@@ -3,7 +3,6 @@ package other.producerconsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -50,7 +49,7 @@ public class ProducerConsumerByBq {
         for (int i = 0; i < 3; i++) {
             service.submit(new Consumer("C-"+i,blockingQueue));
         }
-        service.shutdownNow();*/
+        service.shutdown();*/
     }
 
     public static class Producer extends Thread {
