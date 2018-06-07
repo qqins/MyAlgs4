@@ -14,6 +14,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author: Hello World
  * @date: 2018/6/6 11:25
+ *
+ * 这种方法与使用synchronized关键字方法是一样的
+ * 使用了一把锁, 不能同时生产和消费
  */
 public class ProducerConsumerByLock {
     private static final Logger logger = LoggerFactory.getLogger(ProducerConsumerByLock.class.getName());

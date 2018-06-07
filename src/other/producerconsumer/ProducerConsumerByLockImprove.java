@@ -14,6 +14,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author: Hello World
  * @date: 2018/6/6 17:18
+ *
+ * 对条件锁的改进, 参考BlockingQueue中put, take方法
+ * 使用了两把锁, 可以同时进行生产和消费
  */
 public class ProducerConsumerByLockImprove {
     private static final Logger logger = LoggerFactory.getLogger(ProducerConsumerByLock.class.getName());
@@ -58,8 +61,13 @@ public class ProducerConsumerByLockImprove {
                     logger.info("[" + name + "] Producing value : +" + productID);
                     queue.offer(productID.getAndIncrement());
                     c = count.getAndIncrement();
+                    /**
+                     * 若当前队列未满, 则唤醒其余生产者线程进行生产
+                     * 此时count实际为c+1
+                     * 或者将if中条件改为quene.size()<CAPACITY
+                     */
                     if (c + 1 < CAPACITY) {
-                        NOT_FULL.signal();
+                        NOT_FULL.signalAll();
                     }
                     Thread.sleep(new Random().nextInt(1000));
                 } catch (InterruptedException e) {
@@ -67,6 +75,11 @@ public class ProducerConsumerByLockImprove {
                 } finally {
                     PRODUCE.unlock();
                 }
+                /**
+                 * 在进行本次生产之前, 若c==0表明之前队列为空, 即消费者线程
+                 * 全部在等待唤醒
+                 * 则需要唤醒消费者进行消费
+                 */
                 if (c == 0) {
                     try {
                         CONSUMER.lockInterruptibly();
@@ -100,9 +113,15 @@ public class ProducerConsumerByLockImprove {
                     }
                     int x = queue.poll();
                     logger.info("[" + name + "] Consuming : -" + x);
-                    c = count.decrementAndGet();
-                    if (c > 0) {
-                        NOT_EMPTY.signal();
+                    c = count.getAndDecrement();
+                    /**
+                     * 若此时队列非空, 则唤醒其余被挂起的线程起来干活
+                     * 因为此时count先赋值再减1, 所以此时count实际为
+                     * c-1, 队列非空时, 即c-1>0
+                     * 或者将if中条件改为!queue.isEmpty()
+                     */
+                    if (c > 1) {
+                        NOT_EMPTY.signalAll();
                     }
                     Thread.sleep(new Random().nextInt(1000));
                 } catch (InterruptedException e) {
@@ -110,6 +129,9 @@ public class ProducerConsumerByLockImprove {
                 } finally {
                     CONSUMER.unlock();
                 }
+                /**
+                 * 若消费之前c==CAPACITY, 则表明生产线程全部被挂起, 等待被唤醒
+                 */
                 if (c == CAPACITY) {
                     try {
                         PRODUCE.lockInterruptibly();
