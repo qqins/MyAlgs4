@@ -50,6 +50,20 @@ class Singleton1 {
  * 禁止指令重排优化这条语义直到jdk1.5以后才能正确工作。此前的JDK中即使将变量声明为volatile也
  * 无法完全避免重排序所导致的问题。所以，在jdk1.5版本前，双重检查锁形式的单例模式是无法保证线
  * 程安全的
+ *
+ * new Singleton()并非是一个原子操作，它有多条指令组成：
+ * memory = allocate(); //1：分配对象的内存空间
+ * ctorInstance(memory); //2：初始化对象
+ * instance = memory; //3：设置instance指向刚分配的内存地址
+ *
+ * 但是经过重排序后：
+ * memory = allocate(); //1：分配对象的内存空间
+ * instance = memory; //3：设置instance指向刚分配的内存地址，此时对象还没被初始化
+ * ctorInstance(memory); //2：初始化对象
+ *
+ * 指令重排之后，instance指向分配好的内存放在了前面，而这段内存的初始化被排在了后面，
+ * 在线程A初始化完成这段内存之前，线程B虽然进不去同步代码块，但是在同步代码块之前的
+ * 判断就会发现instance不为空，此时线程B获得instance对象进行使用就可能发生错误。
  */
 class Singleton2 {
     private static volatile Singleton2 INSTANCE = null;

@@ -30,7 +30,7 @@
         <!--fileName 指定当前日志文件的位置和文件名称-->
         <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log"
                                  filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
             <Policies>
                 <!--TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用，
                     注意filePattern中配置的文件重命名规则是${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i，
