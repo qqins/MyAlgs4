@@ -1,4 +1,4 @@
-package algorithms4.chapter2.section1.sort;
+package algorithms4.chapter2.sort;
 
 
 import java.util.Arrays;
