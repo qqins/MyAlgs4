@@ -85,8 +85,8 @@ public class Merge {
     public static void sortBU(Comparable[] a) {
         int N = a.length;
         aux = new Comparable[N];
-        for (int sz = 1; sz < N; sz = sz + sz) {
-            for (int lo = 0; lo < N - sz; lo += sz + sz) {
+        for (int sz = 1; sz < N; sz *= 2) {
+            for (int lo = 0; lo < N - sz; lo += 2 * sz) {
                 /**
                  * mid=lo+((lo+sz+sz-1)-lo)/2=lo+(sz+sz-1)/2=lo+sz-1
                  * 之所以使用Math.min, 是因为当N为奇数时的情况
