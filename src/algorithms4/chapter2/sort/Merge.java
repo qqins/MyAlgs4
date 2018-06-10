@@ -81,6 +81,7 @@ public class Merge {
 
     /**
      * 自底向上
+     * 比较适合用链表组织的数据
      */
     public static void sortBU(Comparable[] a) {
         int N = a.length;
