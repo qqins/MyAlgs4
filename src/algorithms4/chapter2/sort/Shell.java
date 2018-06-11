@@ -6,6 +6,8 @@ import java.util.Random;
 /**
  * @author: Hello World
  * @date: 2018/6/3 10:53
+ *
+ * 空间复杂度为 O(1), 不稳定
  */
 public class Shell {
     public static void sort(Comparable[] a) {
