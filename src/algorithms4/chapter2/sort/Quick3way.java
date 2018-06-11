@@ -25,6 +25,9 @@ public class Quick3way {
         if (hi <= lo) {
             return;
         }
+        /**
+         * lt~gt之间的元素=v
+         */
         int lt = lo;
         int i = lo + 1;
         int gt = hi;
