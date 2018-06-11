@@ -1,7 +1,5 @@
 package algorithms4.chapter2.sort;
 
-import com.sun.org.apache.xerces.internal.dom.PSVIAttrNSImpl;
-
 import java.util.Arrays;
 import java.util.Random;
 
