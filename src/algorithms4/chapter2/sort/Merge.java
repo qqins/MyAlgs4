@@ -61,7 +61,7 @@ public class Merge {
         sort(a, mid + 1, hi);
         /**
          * 因为左右部分各自有序
-         * 则只需a[mid]<=a[mid+1], 才进行排序
+         * 则只需a[mid]>a[mid+1], 才进行排序
          */
         if (Template.less(a[mid + 1], a[mid])) {
             merge(a, lo, mid, hi);
