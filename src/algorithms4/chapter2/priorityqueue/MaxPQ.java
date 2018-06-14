@@ -7,12 +7,8 @@ import java.util.Random;
  * @date: 2018/6/13 21:04
  */
 public class MaxPQ<Key extends Comparable<Key>> {
-    private Key[] pq;
+    private Key[] pq = (Key[]) new Comparable[2];
     private int N = 0;
-
-    public MaxPQ(int maxN) {
-        pq = (Key[]) new Comparable[maxN + 1];
-    }
 
     public boolean isEmpty() {
         return N == 0;
@@ -22,7 +18,18 @@ public class MaxPQ<Key extends Comparable<Key>> {
         return N;
     }
 
+    private void resize(int max) {
+        Key[] temp = (Key[]) new Comparable[max];
+        for (int i = 0; i < N + 1; i++) {
+            temp[i] = pq[i];
+        }
+        pq = temp;
+    }
+
     public void insert(Key v) {
+        if (N + 1 == pq.length) {
+            resize(2 * pq.length);
+        }
         pq[++N] = v;
         swim(N);
     }
@@ -36,8 +43,11 @@ public class MaxPQ<Key extends Comparable<Key>> {
          * 或者这样写：exch(1,N); pq[N]=null; N--;
          */
         exch(1, N--);
-        pq[N+1] = null;
+        pq[N + 1] = null;
         sink(1);
+        if (N > 0 && N == pq.length / 4) {
+            resize(pq.length / 2);
+        }
         return max;
     }
 
@@ -84,12 +94,14 @@ public class MaxPQ<Key extends Comparable<Key>> {
     }
 
     public static void main(String[] args) {
-        MaxPQ<Integer> maxPQ = new MaxPQ(10);
+        MaxPQ<Integer> maxPQ = new MaxPQ();
         Random randomInt = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             maxPQ.insert(randomInt.nextInt(100));
         }
         System.out.println(maxPQ.toString());
+        maxPQ.delMax();
+        maxPQ.delMax();
         maxPQ.delMax();
         System.out.println(maxPQ.toString());
     }
