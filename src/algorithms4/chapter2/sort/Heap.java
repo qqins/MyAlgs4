@@ -6,6 +6,9 @@ import java.util.Random;
 /**
  * @author: Hello World
  * @date: 2018/6/14 19:27
+ *
+ * 排序类型	平均情况	    最好情况	    最坏情况	    辅助空间	  稳定性
+ * 堆排序	O(nlog₂n)	O(nlog₂n)	O(nlog₂n)	O(1)	  不稳定
  */
 public class Heap {
     public void sort(Comparable[] pq) {
