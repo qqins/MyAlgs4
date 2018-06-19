@@ -70,6 +70,10 @@ public class SelectKthSmall {
                 lo = j + 1;
             }
         }
+        /**
+         * 之所以返回a[k], 在while中，最后只剩下两个数比较，那么所需的
+         * a[k]必定在这两个数之间，若不是a[j], 那么就肯定为a[k]
+         */
         return a[k];
     }
 
