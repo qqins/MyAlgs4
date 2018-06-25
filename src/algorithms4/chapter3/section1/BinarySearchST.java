@@ -2,6 +2,7 @@ package algorithms4.chapter3.section1;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author: Hello World
@@ -141,15 +142,18 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         if (hi == null) {
             throw new IllegalArgumentException("secone argument to keys() is null");
         }
-        Queue<Key> queue = new ArrayDeque<>();
+        /**
+         * 将Stack换成ArrayDeque，则输出倒序
+         */
+        Stack<Key> queue = new Stack<>();
         if (lo.compareTo(hi) > 0) {
             return queue;
         }
         for (int i = rank(lo); i < rank(hi); i++) {
-            ((ArrayDeque<Key>) queue).push(keys[i]);
+            queue.push(keys[i]);
         }
         if (contains(hi)) {
-            ((ArrayDeque<Key>) queue).push(keys[rank(hi)]);
+             queue.push(keys[rank(hi)]);
         }
         return queue;
     }
