@@ -1,6 +1,5 @@
 package algorithms4.chapter3.section1;
 
-import java.net.MalformedURLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -170,6 +169,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         for (int i = 0; i < str.length(); i++) {
             st.put(str.charAt(i), i);
         }
+        System.out.println(st.toString());
+        st.delete('A');
         System.out.println(st.toString());
     }
 }
