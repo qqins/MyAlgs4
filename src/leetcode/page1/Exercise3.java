@@ -138,7 +138,7 @@ public class Exercise3 {
     }
 
     public static void main(String[] args) {
-        String str = "pwwkew";
+        String str = "xabcabcx";
         System.out.println(lengthOfLongestSubstring4(str));
     }
 }
