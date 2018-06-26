@@ -176,5 +176,6 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         System.out.println(st.toString());
         st.delete('A');
         System.out.println(st.toString());
+        System.out.println(st.get('M'));
     }
 }
