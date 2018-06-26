@@ -1,11 +1,6 @@
 package algorithms4.chapter3.section2;
 
-import com.sun.javafx.scene.control.skin.TableHeaderRow;
-
-import java.io.InputStreamReader;
-import java.security.interfaces.ECKey;
 import java.util.ArrayDeque;
-import java.util.IllformedLocaleException;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
