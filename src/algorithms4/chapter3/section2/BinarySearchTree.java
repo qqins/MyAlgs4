@@ -1,6 +1,5 @@
 package algorithms4.chapter3.section2;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayDeque;
 import java.util.NoSuchElementException;
 import java.util.Queue;
@@ -8,6 +7,8 @@ import java.util.Queue;
 /**
  * @author: Hello World
  * @date: 2018/6/26 19:25
+ *
+ * 二叉查找数
  */
 public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     private Node root;
