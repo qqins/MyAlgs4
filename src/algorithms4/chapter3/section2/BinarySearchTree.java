@@ -1,5 +1,6 @@
 package algorithms4.chapter3.section2;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayDeque;
 import java.util.NoSuchElementException;
 import java.util.Queue;
@@ -162,6 +163,83 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
     }
 
+    public Key ceiling(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("argument to ceiling() is null");
+        }
+        if (isEmpty()) {
+            throw new NoSuchElementException("calls ceiling() with empty symbol table");
+        }
+        Node x = ceiling(root, key);
+        if (x == null) {
+            return null;
+        } else {
+            return x.key;
+        }
+    }
+
+    private Node ceiling(Node x, Key key) {
+        if (x == null) {
+            return null;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) {
+            return x;
+        } else if (cmp < 0) {
+            Node t = ceiling(x.left, key);
+            if (t != null) {
+                return t;
+            } else {
+                return x;
+            }
+        } else {
+            return ceiling(x.right, key);
+        }
+    }
+
+    public Key select(int k) {
+        if (k < 0 || k > size()) {
+            throw new IllegalArgumentException("argument to select() is invalid: " + k);
+        }
+        Node x = select(root, k);
+        return x.key;
+    }
+
+    private Node select(Node x, int k) {
+        if (x == null) {
+            return null;
+        }
+        int t = size(x.left);
+        if (t > k) {
+            return select(x.left, k);
+        } else if (t < k) {
+            return select(x.right, k - t - 1);
+        } else {
+            return x;
+        }
+    }
+
+    public int rank(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("argument to rank() is null");
+        }
+        return rank(key, root);
+    }
+
+    private int rank(Key key, Node x) {
+        if (x == null) {
+            return 0;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) {
+            return rank(key, x.left);
+        } else if (cmp > 0) {
+            return 1 + size(x.left) + rank(key, x.right);
+        } else {
+            return size(x.left);
+        }
+    }
+
     public Iterable<Key> keys() {
         return keys(min(), max());
     }
@@ -212,5 +290,8 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
         System.out.println(bst.toString());
         System.out.println(bst.floor('W'));
+        System.out.println(bst.ceiling('I'));
+        System.out.println(bst.select(4));
+        System.out.println(bst.rank('L'));
     }
 }
