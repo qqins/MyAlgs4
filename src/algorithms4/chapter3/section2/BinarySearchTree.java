@@ -1,5 +1,8 @@
 package algorithms4.chapter3.section2;
 
+import algorithms4.chapter2.sort.Merge;
+
+import java.security.interfaces.ECKey;
 import java.util.ArrayDeque;
 import java.util.NoSuchElementException;
 import java.util.Queue;
@@ -7,7 +10,7 @@ import java.util.Queue;
 /**
  * @author: Hello World
  * @date: 2018/6/26 19:25
- *
+ * <p>
  * 二叉查找数
  */
 public class BinarySearchTree<Key extends Comparable<Key>, Value> {
@@ -76,7 +79,8 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
             throw new IllegalArgumentException("calls put() with a null key");
         }
         if (val == null) {
-
+            delete(key);
+            return;
         }
         root = put(root, key, val);
     }
@@ -241,6 +245,70 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         }
     }
 
+    public void deleteMin() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Symbol table underflow");
+        }
+        root = deleteMin(root);
+    }
+
+    private Node deleteMin(Node x) {
+        if (x.left == null) {
+            return x.right;
+        }
+        x.left = deleteMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
+    public void deleteMax() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Symbol table underflow");
+        }
+        root = deleteMax(root);
+    }
+
+    private Node deleteMax(Node x) {
+        if (x.right == null) {
+            return x.left;
+        }
+        x.right = deleteMax(x.right);
+        x.size = size(x.right) + size(x.left) + 1;
+        return x;
+    }
+
+    public void delete(Key key) {
+        if (key == null) {
+            throw new IllegalArgumentException("calls delete() with a null key");
+        }
+        root = delete(root, key);
+    }
+
+    private Node delete(Node x, Key key) {
+        if (x == null) {
+            return null;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) {
+            x.left = delete(x.left, key);
+        } else if (cmp > 0) {
+            x.right = delete(x.right, key);
+        } else {
+            if (x.left == null) {
+                return x.right;
+            }
+            if (x.right == null) {
+                return x.left;
+            }
+            Node t = x;
+            x = min(x.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
     public Iterable<Key> keys() {
         return keys(min(), max());
     }
@@ -294,5 +362,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         System.out.println(bst.ceiling('I'));
         System.out.println(bst.select(4));
         System.out.println(bst.rank('L'));
+        bst.deleteMax();
+        bst.deleteMin();
+        System.out.println(bst.toString());
+        bst.delete('C');
+        System.out.println(bst.toString());
     }
 }
