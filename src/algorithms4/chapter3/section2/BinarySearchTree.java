@@ -1,8 +1,5 @@
 package algorithms4.chapter3.section2;
 
-import algorithms4.chapter2.sort.Merge;
-
-import java.security.interfaces.ECKey;
 import java.util.ArrayDeque;
 import java.util.NoSuchElementException;
 import java.util.Queue;
