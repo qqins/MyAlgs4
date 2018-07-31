@@ -1,9 +1,7 @@
 package algorithms4.chapter3.section3;
 
-import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayDeque;
-import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
@@ -359,7 +357,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
             redBlackBST.put(str.charAt(i), i);
         }
         System.out.println(redBlackBST.toString());
-        redBlackBST.deleteMin();
+        redBlackBST.delete('L');
         System.out.println(redBlackBST.toString());
     }
 }

@@ -1,4 +1,6 @@
-package swordoffer.chapter2;
+package swordoffer.chapter2.singleton;
+
+import java.io.*;
 
 /**
  * @author: Hello World
@@ -8,14 +10,17 @@ package swordoffer.chapter2;
  * 设计一个类，我们只能生产该类的一个实例
  * <p>
  * 静态方法与静态内部类只有被调用时才会加载
- *
+ * <p>
  * 参考: https://itimetraveler.github.io/2016/09/08/%E3%80%90Java%E3%80%91%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/
  */
 public class Question2 {
-    public static void main(String[] args) {
-        Singleton1.getInstance();
-        Singleton2.getInstance();
-        Singleton3.getInstance();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tempFile"));
+        oos.writeObject(Singleton2.getInstance());
+        File file = new File("tempFile");
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+        Singleton2 newInstance = (Singleton2) ois.readObject();
+        System.out.println(newInstance == Singleton2.getInstance());
     }
 }
 
@@ -50,22 +55,27 @@ class Singleton1 {
  * 禁止指令重排优化这条语义直到jdk1.5以后才能正确工作。此前的JDK中即使将变量声明为volatile也
  * 无法完全避免重排序所导致的问题。所以，在jdk1.5版本前，双重检查锁形式的单例模式是无法保证线
  * 程安全的
- *
+ * <p>
  * new Singleton()并非是一个原子操作，它有多条指令组成：
  * memory = allocate(); //1：分配对象的内存空间
  * ctorInstance(memory); //2：初始化对象
  * instance = memory; //3：设置instance指向刚分配的内存地址
- *
+ * <p>
  * 但是经过重排序后：
  * memory = allocate(); //1：分配对象的内存空间
  * instance = memory; //3：设置instance指向刚分配的内存地址，此时对象还没被初始化
  * ctorInstance(memory); //2：初始化对象
- *
+ * <p>
  * 指令重排之后，instance指向分配好的内存放在了前面，而这段内存的初始化被排在了后面，
  * 在线程A初始化完成这段内存之前，线程B虽然进不去同步代码块，但是在同步代码块之前的
  * 判断就会发现instance不为空，此时线程B获得instance对象进行使用就可能发生错误。
+ * <p>
+ * 此种方法在反序列化时会破坏单例
+ * 普通的Java类的反序列化过程中，会通过反射调用类的默认构造函数来初始化对象。所以，
+ * 即使单例中构造函数是私有的，也会被反射给破坏掉。由于反序列化后的对象是重新new出
+ * 来的，所以这就破坏了单例。
  */
-class Singleton2 {
+class Singleton2 implements Serializable {
     private static volatile Singleton2 INSTANCE = null;
 
     private Singleton2() {
@@ -82,6 +92,14 @@ class Singleton2 {
         }
         return INSTANCE;
     }
+
+    /**
+     *  防止序列化破坏单例模式
+     *  http://www.hollischuang.com/archives/1144
+     */
+    private Object readResolve() {
+        return INSTANCE;
+    }
 }
 
 /**
@@ -91,8 +109,14 @@ class Singleton2 {
  * 因为在JVM进行类加载的时候他会保证数据是同步的，我们可以这样实现：采用内部类，在这个内部类
  * 里面去创建对象实例。这样的话，只要应用中不使用内部类 JVM 就不会去加载这个单例类，也就不会
  * 创建单例对象，从而实现「懒汉式」的延迟加载和线程安全。
+ * <p>
+ * 类的初始化是由ClassLoader完成的,至于为什么ClassLoader加载类是线程安全的，这里可以先直接
+ * 回答：ClassLoader的loadClass方法在加载类的时候使用了synchronized关键字。也正是因为这样,
+ * 除非被重写，这个方法默认在整个装载过程中都是同步的（线程安全的）
+ *
+ * 此种方法在反序列化时会破坏单例
  */
-class Singleton3 {
+class Singleton3 implements Serializable{
     private Singleton3() {
 
     }
@@ -103,5 +127,40 @@ class Singleton3 {
 
     private static class SingletonHolder {
         private static final Singleton3 INSTANCE = new Singleton3();
+    }
+
+    /**
+     *  防止序列化破坏单例模式
+     */
+    private Object readResolve() {
+        return SingletonHolder.INSTANCE;
+    }
+}
+
+/**
+ * 枚举
+ * 如果把枚举类进行反序列化，会发现他也是使用了static final来修饰每一个枚举项
+ * <p>
+ * 枚举来实现单例可以防止被反序列化
+ * Java的序列化机制针对枚举类型是特殊处理的。简单来讲，在序列化枚举类型时，只会
+ * 存储枚举类的引用和枚举常量的名称。随后的反序列化的过程中，这些信息被用来在运
+ * 行时环境中查找存在的枚举类型对象。这样你就可以在同一个运行时环境中反序列化枚
+ * 举常量，并且你会得到同一个实例对象。枚举类型的序列化机制保证只会查找已经存在
+ * 的枚举类型实例，而不是创建新的实例
+ *
+ * 经过enum关键词修饰的类继承Enum，而Enum实现了Serializable接口
+ * http://www.hollischuang.com/archives/2498
+ * http://www.hollischuang.com/archives/197
+ */
+enum Singleton4 implements MySingleton {
+    INSTANCE {
+        @Override
+        public void doSomething() {
+
+        }
+    };
+
+    public static MySingleton getInstance() {
+        return Singleton4.INSTANCE;
     }
 }
