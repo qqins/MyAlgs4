@@ -1,7 +1,5 @@
 package algorithms4.chapter3.section1;
 
-import jdk.nashorn.internal.objects.NativeUint8Array;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -92,7 +90,7 @@ public class SequentialSearchST<Key, Value> {
     public Iterable<Key> keys() {
         Queue<Key> queue = new ArrayDeque<>();
         for (Node x = first; x != null; x = x.next) {
-            ((ArrayDeque<Key>) queue).push(x.key);
+            queue.add(x.key);
         }
         return queue;
     }
