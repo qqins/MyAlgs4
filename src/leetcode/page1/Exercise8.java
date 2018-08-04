@@ -71,7 +71,7 @@ public class Exercise8 {
                 t = result * 10;
                 if (!flag && result > Integer.MAX_VALUE) {
                     return Integer.MAX_VALUE;
-                } else if (flag && (-1*result) < Integer.MIN_VALUE) {
+                } else if (flag && (-1 * result) < Integer.MIN_VALUE) {
                     return Integer.MIN_VALUE;
                 }
             } else {

@@ -43,6 +43,7 @@ public class Exercise9 {
 
     /**
      * 该方法的复杂度为O(log10 n)
+     *
      * @param x
      * @return
      */
