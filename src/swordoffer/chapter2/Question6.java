@@ -11,6 +11,15 @@ import java.util.Stack;
  * 面试题6：从尾到头打印链表
  */
 public class Question6 {
+    static class ListNode {
+        int val;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
     /**
      * 方法1: 使用栈
      */
@@ -74,11 +83,4 @@ public class Question6 {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next = null;
 
-    ListNode(int val) {
-        this.val = val;
-    }
-}
