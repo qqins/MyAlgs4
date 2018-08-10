@@ -1,5 +1,6 @@
 package other.binary_tree_traversal;
 
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Stack;
@@ -220,7 +221,6 @@ public class Traversal {
         d.left = g;
         d.right = h;
         e.right = i;
-
         //前序遍历(根左右), 结果为: ABDGHCEIF
 //        recursionPreorderTraversal(a);
 //        preorderTraversal(a);
