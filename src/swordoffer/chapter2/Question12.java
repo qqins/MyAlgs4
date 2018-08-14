@@ -34,6 +34,7 @@ public class Question12 {
 
         //记录结果的数组
         int[] pathLength = {0};
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (hasPathCore(matrix, rows, cols, str, visited, i, j, pathLength)) {
@@ -60,6 +61,7 @@ public class Question12 {
         if (pathLength[0] == str.length) {
             return true;
         }
+
         boolean hasPath = false;
 
         //判断位置是否合法
@@ -76,6 +78,7 @@ public class Question12 {
                     || hasPathCore(matrix, rows, cols, str, visited, row, col + 1, pathLength)
                     || hasPathCore(matrix, rows, cols, str, visited, row, col + 1, pathLength)
                     || hasPathCore(matrix, rows, cols, str, visited, row + 1, col, pathLength);
+
             if (!hasPath) {
                 pathLength[0]--;
                 visited[row * cols + col] = false;
