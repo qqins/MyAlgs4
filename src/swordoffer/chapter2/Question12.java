@@ -29,10 +29,6 @@ public class Question12 {
             return false;
         }
         boolean[] visited = new boolean[rows * cols];
-        for (int i = 0; i < visited.length; i++) {
-            visited[i] = false;
-        }
-
         //记录结果的数组
         int[] pathLength = {0};
 

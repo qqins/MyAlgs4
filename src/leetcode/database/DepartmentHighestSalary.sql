@@ -37,9 +37,8 @@ SELECT
     Employee.name AS 'Employee',
     Salary
 FROM
-    Employee
-        JOIN
-    Department ON Employee.DepartmentId = Department.Id
+    Employee JOIN Department
+ON Employee.DepartmentId = Department.Id
 WHERE
     (Employee.DepartmentId , Salary) IN
     (   SELECT
