@@ -93,6 +93,9 @@ public class Main3 {
     public static boolean find(int[][] st, int no) {
         int[] time = new int[1000000];
         for (int i = 0; i < st.length; i++) {
+            /**
+             * 假如除no外都没有冲突, 那就把no给取消了
+             */
             if (i != no) {
                 for (int j = st[i][0]; j < st[i][1]; j++) {
                     if (time[j] != 0) {
