@@ -13,9 +13,9 @@ import java.util.Arrays;
  * abc,acb,bac,bca,cab和cba。
  */
 public class Question38 {
-    private ArrayList<String> result = new ArrayList<>();
+    private static ArrayList<String> result = new ArrayList<>();
 
-    public ArrayList<String> Permutation(String str) {
+    public static ArrayList<String> Permutation(String str) {
         if (str.length() == 0) {
             return result;
         }
@@ -25,7 +25,7 @@ public class Question38 {
         return result;
     }
 
-    private void back(char[] chars, boolean[] hasUsed, StringBuilder stringBuilder) {
+    private static void back(char[] chars, boolean[] hasUsed, StringBuilder stringBuilder) {
         if (stringBuilder.length() == chars.length) {
             result.add(stringBuilder.toString());
             return;
@@ -44,5 +44,11 @@ public class Question38 {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             hasUsed[i] = false;
         }
+    }
+
+    public static void main(String[] args) {
+        String str = "aazz";
+        ArrayList<String> re = Permutation(str);
+        System.out.println(re);
     }
 }
