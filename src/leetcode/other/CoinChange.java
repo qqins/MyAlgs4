@@ -105,7 +105,7 @@ public class CoinChange {
     }
 
     public static void main(String[] args) {
-        int[] coins = {1, 2, 5};
-        System.out.println(coinChangeByDpTopToBottom(coins, 11));
+        int[] coins = {8, 10, 20};
+        System.out.println(coinChangeByDpTopToBottom(coins, 122));
     }
 }
