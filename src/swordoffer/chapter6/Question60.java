@@ -82,7 +82,7 @@ public class Question60 {
     }
 
     public static void main(String[] args) {
-        printProbability(3);
-//        printProbability2(3);
+//        printProbability(6);
+        printProbability2(6);
     }
 }

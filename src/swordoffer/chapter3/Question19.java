@@ -12,6 +12,33 @@ package swordoffer.chapter3;
  */
 public class Question19 {
     public boolean match(char[] str, char[] pattern) {
-        return false;
+        if (str == null || pattern == null) {
+            return false;
+        }
+        boolean[][] dp = new boolean[str.length + 1][pattern.length + 1];
+        dp[0][0] = true;
+        for (int i = 0; i < pattern.length; i++) {
+            if (pattern[i] == '*' && dp[0][i - 1]) {
+                dp[0][i + 1] = true;
+            }
+        }
+        for (int i = 0; i < str.length; i++) {
+            for (int j = 0; j < pattern.length; j++) {
+                if (pattern[j] == '.') {
+                    dp[i + 1][j + 1] = dp[i][j];
+                }
+                if (pattern[j] == str[i]) {
+                    dp[i + 1][j + 1] = dp[i][j];
+                }
+                if (pattern[j] == '*') {
+                    if (pattern[j - 1] != str[i] && pattern[j - 1] != '.') {
+                        dp[i + 1][j + 1] = dp[i + 1][j - 1];
+                    } else {
+                        dp[i + 1][j + 1] = (dp[i + 1][j] || dp[i][j + 1] || dp[i + 1][j - 1]);
+                    }
+                }
+            }
+        }
+        return dp[str.length][pattern.length];
     }
 }
