@@ -16,11 +16,11 @@ import java.io.*;
 public class Question2 {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tempFile"));
-        oos.writeObject(Singleton2.getInstance());
+        oos.writeObject(Singleton3.getInstance());
         File file = new File("tempFile");
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-        Singleton2 newInstance = (Singleton2) ois.readObject();
-        System.out.println(newInstance == Singleton2.getInstance());
+        Singleton3 newInstance = (Singleton3) ois.readObject();
+        System.out.println(newInstance == Singleton3.getInstance());
     }
 }
 
