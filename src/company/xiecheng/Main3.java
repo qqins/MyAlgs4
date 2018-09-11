@@ -61,7 +61,7 @@ public class Main3 {
 
     public static void put(int key, int value) {
         //满足当key不变，仅改变value时，不算使用数据
-        if (data.containsKey(key)) {
+        /*if (data.containsKey(key)) {
             data.put(key, value);
             return;
         }
@@ -69,16 +69,16 @@ public class Main3 {
             data.remove(deque.pollFirst());
         }
         deque.add(key);
-        data.put(key, value);
+        data.put(key, value);*/
 
         //key不变，仅改变value时，也算使用数据
-        /*if (data.containsKey(key)) {
+        if (data.containsKey(key)) {
             deque.remove(key);
         }
         if (deque.size() == capacity) {
             data.remove(deque.pollFirst());
         }
         data.put(key, value);
-        deque.add(key);*/
+        deque.add(key);
     }
 }
