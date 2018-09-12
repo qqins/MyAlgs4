@@ -5,7 +5,7 @@ package company.jingdong;
  * @date: 2018/9/9 19:25
  */
 public class Main {
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("A");
         new Main();
         new Main();
@@ -19,9 +19,9 @@ public class Main {
     }
     static {
         System.out.println("D");
-    }*/
+    }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.print(fun1());
     }
 
@@ -37,5 +37,5 @@ public class Main {
     public static String fun2() {
         System.out.print("C");
         return "D";
-    }
+    }*/
 }

@@ -22,7 +22,7 @@ class Test2 {
 }
 
 class A {
-//    public static String c = "C";
+    public static String c = "C";
     static {
         System.out.print("A");
     }
@@ -32,5 +32,5 @@ class B extends A {
     static{
         System.out.print("B");
     }
-    public static String c = "C";
+//    public static String c = "C";
 }
