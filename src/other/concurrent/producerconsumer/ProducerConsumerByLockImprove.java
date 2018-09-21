@@ -1,4 +1,4 @@
-package other.producerconsumer;
+package other.concurrent.producerconsumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

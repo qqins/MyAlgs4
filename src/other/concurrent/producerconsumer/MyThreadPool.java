@@ -1,4 +1,4 @@
-package other.producerconsumer;
+package other.concurrent.producerconsumer;
 
 
 import java.util.concurrent.*;
