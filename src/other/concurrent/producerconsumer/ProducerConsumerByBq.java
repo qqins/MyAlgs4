@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,23 +35,23 @@ public class ProducerConsumerByBq {
         consumer2.start();
         consumer3.start();*/
 
-        MyThreadPool mtp = new MyThreadPool();
+        /*MyThreadPool mtp = new MyThreadPool();
         for (int i = 1; i < 3; i++) {
             mtp.addTask(new Producer("P-" + i));
         }
         for (int i = 1; i < 3; i++) {
             mtp.addTask(new Consumer("C-" + i));
         }
-        mtp.shutdown();
+        mtp.shutdown();*/
 
-        /*ExecutorService service=Executors.newCachedThreadPool();
+        ExecutorService service= Executors.newCachedThreadPool();
         for (int i = 0; i < 2; i++) {
-            service.submit(new Producer("P-"+i,blockingQueue));
+            service.submit(new Producer("P-"+i));
         }
         for (int i = 0; i < 3; i++) {
-            service.submit(new Consumer("C-"+i,blockingQueue));
+            service.submit(new Consumer("C-"+i));
         }
-        service.shutdown();*/
+        service.shutdown();
     }
 
     public static class Producer extends Thread {

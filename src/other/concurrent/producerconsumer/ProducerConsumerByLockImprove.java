@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author: Hello World
  * @date: 2018/6/6 17:18
- *
+ * <p>
  * 对条件锁的改进, 参考BlockingQueue中put, take方法
  * 使用了两把锁, 可以同时进行生产和消费
  */
@@ -53,7 +53,7 @@ public class ProducerConsumerByLockImprove {
         public void run() {
             while (true) {
                 try {
-                    PRODUCE.lockInterruptibly();
+                    PRODUCE.lock();
                     while (queue.size() == CAPACITY) {
                         logger.info("队列已满");
                         NOT_FULL.await();
@@ -82,10 +82,8 @@ public class ProducerConsumerByLockImprove {
                  */
                 if (c == 0) {
                     try {
-                        CONSUMER.lockInterruptibly();
+                        CONSUMER.lock();
                         NOT_EMPTY.signalAll();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     } finally {
                         CONSUMER.unlock();
                     }
@@ -106,7 +104,7 @@ public class ProducerConsumerByLockImprove {
         public void run() {
             while (true) {
                 try {
-                    CONSUMER.lockInterruptibly();
+                    CONSUMER.lock();
                     while (queue.isEmpty()) {
                         logger.info("队列已空");
                         NOT_EMPTY.await();
@@ -134,10 +132,8 @@ public class ProducerConsumerByLockImprove {
                  */
                 if (c == CAPACITY) {
                     try {
-                        PRODUCE.lockInterruptibly();
+                        PRODUCE.lock();
                         NOT_FULL.signalAll();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     } finally {
                         PRODUCE.unlock();
                     }
