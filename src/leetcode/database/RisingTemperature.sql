@@ -25,6 +25,10 @@
 +----+
 */
 
+/**
+  方法1 显式内连接
+  有INNER JOIN，形成的中间表为两个表经过ON条件过滤后的笛卡尔积
+ */
 SELECT
     weather.id AS 'Id'
 FROM
@@ -33,3 +37,15 @@ FROM
     weather w ON DATEDIFF(weather.RecordDate, w.RecordDate) = 1
         AND weather.Temperature > w.Temperature
 ;
+
+/**
+  方法2 隐式内连接
+  没有INNER JOIN，形成的中间表为两个表的笛卡尔积。
+ */
+
+SELECT
+  weather.id AS 'Id'
+FROM
+  weather, weather w
+WHERE DATEDIFF(weather.RecordDate, w.RecordDate) = 1
+        AND weather.Temperature > w.Temperature
