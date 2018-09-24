@@ -39,8 +39,8 @@ Note:
  */
 
 SELECT DISTINCT t1.* FROM
-stadium AS t1, stadium AS t2, stadium AS t3
-WHERE t1.people >= 100 AND t2.people >= 100 AND t3.people >= 100
+stadium AS t1 JOIN stadium AS t2 JOIN stadium AS t3
+ON t1.people >= 100 AND t2.people >= 100 AND t3.people >= 100
 AND (
     (t1.id - t2.id = 1 AND t2.id - t3.id = 1 AND t1.id - t3.id = 2)
     OR
