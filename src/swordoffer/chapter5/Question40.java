@@ -108,7 +108,7 @@ public class Question40 {
             if (i < k) {
                 temp[i] = input[i];
             } else {
-                for (int j = temp.length / 2; j >= 1; j--) {
+                for (int j = k / 2; j >= 1; j--) {
                     sink(temp, j, k);
                 }
                 if (temp[0] > input[i]) {
