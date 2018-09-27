@@ -95,9 +95,60 @@ public class Question40 {
         input[j] = temp;
     }
 
+    /**
+     * 自己构建堆
+     */
+    public static ArrayList<Integer> getLeastNumbers(int[] input, int k) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (input == null || input.length == 0 || k > input.length || k <= 0) {
+            return res;
+        }
+        int[] temp = new int[k];
+        for (int i = 0; i < input.length; i++) {
+            if (i < k) {
+                temp[i] = input[i];
+            } else {
+                for (int j = temp.length / 2; j >= 1; j--) {
+                    sink(temp, j, k);
+                }
+                if (temp[0] > input[i]) {
+                    temp[0] = input[i];
+                }
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            res.add(temp[i]);
+        }
+        return res;
+    }
+
+    private static void sink(int[] array, int k, int n) {
+        while (2 * k <= n) {
+            int j = 2 * k;
+            if (j < array.length && less(array, j, j + 1)) {
+                j++;
+            }
+            if (!less(array, k, j)) {
+                break;
+            }
+            swapForHeap(array, k, j);
+            k = j;
+        }
+    }
+
+    private static void swapForHeap(int[] array, int i, int j) {
+        int temp = array[i - 1];
+        array[i - 1] = array[j - 1];
+        array[j - 1] = temp;
+    }
+
+    private static boolean less(int[] array, int i, int j) {
+        return array[i - 1] < array[j - 1];
+    }
+
     public static void main(String[] args) {
         int[] input = {4, 5, 1, 6, 2, 7, 3, 8};
-        ArrayList<Integer> res = getLeastNumbersSolution(input, 4);
+        ArrayList<Integer> res = getLeastNumbers(input, 4);
         System.out.println(res);
     }
 }
