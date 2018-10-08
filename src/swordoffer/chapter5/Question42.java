@@ -9,7 +9,7 @@ package swordoffer.chapter5;
  * 组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为O(n).
  */
 public class Question42 {
-    public int findGreatestSumOfSubArray(int[] array) {
+    public static int findGreatestSumOfSubArray(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
@@ -20,5 +20,10 @@ public class Question42 {
             result = Math.max(sum, result);
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        int[] a = {-14, -2, 3, -4, -5};
+        System.out.println(findGreatestSumOfSubArray(a));
     }
 }

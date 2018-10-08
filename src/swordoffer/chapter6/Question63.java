@@ -18,8 +18,8 @@ public class Question63 {
         int min = prices[0];
         int max = Integer.MIN_VALUE;
         for (int i = 1; i < prices.length; i++) {
-            if (min > prices[i - 1]) {
-                min = prices[i - 1];
+            if (min > prices[i]) {
+                min = prices[i];
             }
             if (prices[i] - min > max) {
                 max = prices[i] - min;
