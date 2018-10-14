@@ -199,7 +199,7 @@ public class MaxSumTest {
         int[] a = {4, -3, 5, -2, -1, 2, 6, -2};
         int maxSum;
 
-        maxSum = maxSubSum1(a);
+        /*maxSum = maxSubSum1(a);
         System.out.println("Max sum is " + maxSum + "; it goes"
                 + " from " + seqStart + " to " + seqEnd);
 
@@ -213,7 +213,7 @@ public class MaxSumTest {
 
         maxSum = maxSubSum4(a);
         System.out.println("Max sum is " + maxSum + "; it goes"
-                + " from " + seqStart + " to " + seqEnd);
+                + " from " + seqStart + " to " + seqEnd);*/
 
         for (int n = 100; n <= 1000000; n *= 10) {
             System.out.print(String.format("N = %7d", n));

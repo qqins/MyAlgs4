@@ -1,20 +1,19 @@
-import java.util.Date;
-
 public class Test {
-    static int x = 10;
+    private int[] array = new int[5];
+    private int N = 0;
 
-    static {
-        x += 5;
+    public void push(int item) {
+        if (N == array.length) {
+            resize(2 * array.length);
+        }
+        array[N++] = item;
     }
 
-    public static void main(String[] args) {
-        System.out.println("X=" + x);
-        Date data=new Date();
-        System.out.println(data.getTime());
-        System.out.println(data.getTime());
-    }
-
-    static {
-        x /= 3;
+    private void resize(int size) {
+        int[] temp = new int[size];
+        for (int i = 0; i < N; i++) {
+            temp[i] = array[i];
+        }
+        array = temp;
     }
 }
