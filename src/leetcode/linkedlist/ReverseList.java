@@ -14,12 +14,12 @@ package leetcode.linkedlist;
  */
 public class ReverseList {
     static class ListNode {
-        int val;
-        ListNode next;
+            int val;
+            ListNode next;
 
-        ListNode(int x) {
-            val = x;
-        }
+            ListNode(int x) {
+                val = x;
+            }
     }
 
     /**

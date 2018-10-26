@@ -1,9 +1,6 @@
 package dsaaaij3.chapter3;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author: Hello World
@@ -175,7 +172,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType> {
 
 class TestLinkedList {
     public static void main(String[] args) {
-        System.out.println("===========================================");
+        /*System.out.println("===========================================");
         MyLinkedList<Integer> list = new MyLinkedList<>();
 
         for (int i = 0; i <= 10; i++) {
@@ -198,7 +195,7 @@ class TestLinkedList {
         }
         System.out.println(list);
         System.out.println("===========================================");
-
+*/
         System.out.printf("输入规模     \t自带remove方法 \t迭代器中remove方法 \n");
         for (int n = 100; n <= 1000000; n *= 10) {
             System.out.print(String.format("N=%7d", n));
@@ -210,14 +207,14 @@ class TestLinkedList {
     }
 
     private static void getTimingInfo(int n, int alg) {
-        MyLinkedList<Integer> list;
+        LinkedList<Integer> list;
         Random random=new Random();
         long startTime = System.currentTimeMillis();
         long totalTime = 0;
 
         int k;
         for (k = 0; totalTime < 4000; k++) {
-            list = new MyLinkedList<>();
+            list = new LinkedList<>();
             for (int j = 0; j <n; j++) {
                 list.add(random.nextInt(n));
             }
