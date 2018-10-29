@@ -21,7 +21,7 @@ public class LRUCache {
     public int get(int key) {
         if (cacheData.containsKey(key)) {
             deque.remove(key);
-            deque.add(key);
+            deque.offerLast(key);
             return cacheData.get(key);
         }
         return -1;
@@ -36,6 +36,6 @@ public class LRUCache {
             cacheData.remove(deque.pollFirst());
         }
         cacheData.put(key, value);
-        deque.add(key);
+        deque.offerLast(key);
     }
 }
