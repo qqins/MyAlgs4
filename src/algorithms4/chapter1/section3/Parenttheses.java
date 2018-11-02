@@ -1,9 +1,6 @@
 package algorithms4.chapter1.section3;
 
-import java.util.ArrayDeque;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.*;
 
 public class Parenttheses {
     private static class Stack<Item> implements Iterable<Item> {
@@ -76,13 +73,13 @@ public class Parenttheses {
     }
 
     /**
-     *1.3.4
+     * 1.3.4
      */
     public static boolean isComplete(String str) {
         if (str.length() == 0) {
             return false;
         }
-        Stack<Character> sta = new Stack<>();
+        Deque<Character> sta = new ArrayDeque<>();
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '[') {
                 sta.push('[');
@@ -159,7 +156,7 @@ public class Parenttheses {
     public static void main(String[] args) {
         String str = "[()]{}{[()()]()}";
         String str1 = "";
-        System.out.println(isComplete(str1));
+        System.out.println(isComplete(str));
         completion();
     }
 }

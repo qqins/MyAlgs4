@@ -1,8 +1,5 @@
 package algorithms4.chapter1.section3;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -11,12 +8,11 @@ import java.util.regex.Pattern;
  * @date 2018.5.8
  */
 public class EvaluatePostfix {
-    private static final Logger LOGGER = LogManager.getLogger(EvaluatePostfix.class.getName());
     private static Pattern ISNUMBER = Pattern.compile("[0-9]+");
 
     /**
      * 计算后序表达式：2 3 * 2 1 - / 3 4 1 - * +
-     * 其中序表达式：(((2*3)/(2-1))+(3*(4-1)))
+     * 其中序表达式：2 * 3 / ( 2 - 1 ) + 3 * ( 4 - 1 )
      * 将数字压栈，一遇到运算符就将其取出运算，结果再压入栈
      */
     public static void evaluatePostFix() {
@@ -47,7 +43,7 @@ public class EvaluatePostfix {
 
     /**
      * 计算前序表达式：+ / * 2 3 - 2 1 * 3 - 4 1
-     * 其中序表达式为：(((2*3)/(2-1))+(3*(4-1)))
+     * 其中序表达式为：2 * 3 / ( 2 - 1 ) + 3 * ( 4 - 1 )
      * 先将其反转，将数字压入栈，一遇到运算符就取出数字计算，将计算结果压入栈
      */
     public static void evaluatePreFix() {
@@ -78,7 +74,7 @@ public class EvaluatePostfix {
                 sta.push(n3);
             }
         }
-        LOGGER.debug(sta.pop());
+        System.out.println(sta.pop());
     }
 
     public static void main(String[] args) {

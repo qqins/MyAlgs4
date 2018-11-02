@@ -17,19 +17,62 @@ public class InfixToPostfix {
      * 结果为：2 3 * 2 1 - / 3 4 1 - * +
      */
     public static void infixToPostfix() {
-        String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
+//        String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
+        String str = "2 * 3 / ( 2 - 1 ) + 3 * ( 4 - 1 )";
+//        String str = "6 * ( 5 + ( 2 + 3 ) * 8 + 3 )";
         String[] strings = str.split("\\s+");
         Stack<String> sta = new Stack<>();
         StringBuffer sb = new StringBuffer();
         for (String s : strings) {
-            if (s.equals("(")) {
+            /*if (s.equals("(")) {
             } else if (s.equals(")")) {
                 sb.append(sta.pop() + " ");
             } else if (ISNUMBER.matcher(s).matches()) {
                 sb.append(s + " ");
             } else {
                 sta.push(s);
+            }*/
+            if (ISNUMBER.matcher(s).matches()) {
+                sb.append(s + " ");
+            } else {
+                switch (s) {
+                    case ")":
+                        while (!sta.isEmpty() && (!"(".equals(sta.peek()))) {
+                            sb.append(sta.pop() + " ");
+                        }
+                        sta.pop();
+                        break;
+                    case "(":
+                        sta.push(s);
+                        break;
+                    case "^":
+                        while (!sta.isEmpty() && (!("^".equals(sta.peek()) ||
+                                "(".equals(sta.peek())))) {
+                            sb.append(sta.pop());
+                        }
+                        sta.push(s);
+                        break;
+                    case "*":
+                    case "/":
+                        while (!sta.isEmpty() && (!"+".equals(sta.peek())) &&
+                                (!"-".equals(sta.peek())) && (!"(".equals(sta.peek()))) {
+                            sb.append(sta.pop() + " ");
+                        }
+                        sta.push(s);
+                        break;
+                    case "+":
+                    case "-":
+                        while (!sta.isEmpty() && (!"(".equals(sta.peek()))) {
+                            sb.append(sta.pop() + " ");
+                        }
+                        sta.push(s);
+                        break;
+                    default:
+                }
             }
+        }
+        while (!sta.isEmpty()) {
+            sb.append(sta.pop() + " ");
         }
         System.out.println(sb.toString());
     }
@@ -39,7 +82,8 @@ public class InfixToPostfix {
      * 结果为：(((2*3)/(2-1))+(3*(4-1)))
      */
     public static void postFixToInfix() {
-        String str = "2 3 * 2 1 - / 3 4 1 - * +";
+//        String str = "2 3 * 2 1 - / 3 4 1 - * +";
+        String str = "6 5 2 3 + 8 * + 3 + *";
         String[] strings = str.split("\\s+");
         Stack<String> num = new Stack<>();
         for (String s : strings) {
@@ -61,7 +105,9 @@ public class InfixToPostfix {
      * 结果为：+/*23-21*3-41
      */
     public static void infixToPrefix() {
-        String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
+//        String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
+        String str = "2 * 3  / ( 2 - 1 ) + 3 * ( 4 - 1 )";
+//        String str = "6 * ( 5 + ( 2 + 3 ) * 8 + 3 )";
         String[] strings = str.split("\\s+");
         for (int i = 0; i < strings.length / 2; i++) {
             String temp = strings[i];
@@ -72,20 +118,53 @@ public class InfixToPostfix {
         Stack<String> sta = new Stack<>();
         StringBuffer sb = new StringBuffer();
         for (String s : strings) {
-            if (s.equals(")")) {
-            } else if (s.equals("+")) {
-                sta.push("+");
-            } else if (s.equals("-")) {
-                sta.push("-");
-            } else if (s.equals("*")) {
-                sta.push("*");
-            } else if (s.equals("/")) {
-                sta.push("/");
+            /*if (s.equals(")")) {
             } else if (s.equals("(")) {
                 sb.append(sta.pop() + " ");
-            } else {
+            } else if (ISNUMBER.matcher(s).matches()) {
                 sb.append(s + " ");
+            } else {
+                sta.push(s);
+            }*/
+
+            if (ISNUMBER.matcher(s).matches()) {
+                sb.append(s + " ");
+            } else {
+                switch (s) {
+                    case "(":
+                        while (!sta.isEmpty() && (!")".equals(sta.peek()))) {
+                            sb.append(sta.pop() + " ");
+                        }
+                        sta.pop();
+                        break;
+                    case ")":
+                        sta.push(s);
+                        break;
+                    case "^":
+                        while (!sta.isEmpty() && (!("^".equals(sta.peek()) ||
+                                "(".equals(sta.peek())))) {
+                            sb.append(sta.pop());
+                        }
+                        sta.push(s);
+                        break;
+                    case "*":
+                    case "/":
+                        //由于字符串之前进行了反转，那么处于栈顶的元素优先级是最高的
+                        sta.push(s);
+                        break;
+                    case "+":
+                    case "-":
+                        while (!sta.isEmpty() && (!")".equals(sta.peek()))) {
+                            sb.append(sta.pop() + " ");
+                        }
+                        sta.push(s);
+                        break;
+                    default:
+                }
             }
+        }
+        while (!sta.isEmpty()) {
+            sb.append(sta.pop() + " ");
         }
         System.out.println(sb.reverse().toString());
     }
@@ -118,5 +197,7 @@ public class InfixToPostfix {
 
     public static void main(String[] args) {
         infixToPostfix();
+        postFixToInfix();
+        infixToPrefix();
     }
 }
