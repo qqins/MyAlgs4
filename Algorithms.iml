@@ -10,43 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../maven/repository/org/apache/logging/log4j/log4j-api/2.11.0/log4j-api-2.11.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../maven/repository/org/apache/logging/log4j/log4j-core/2.11.0/log4j-core-2.11.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../maven/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.11.0/log4j-slf4j-impl-2.11.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../maven/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="log4j-api-2.11.0" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://D:/_MyFile/学习/java/Algorithms_4th/algs4.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -55,5 +18,6 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="log4j-api-2.11.0" level="project" />
   </component>
 </module>
