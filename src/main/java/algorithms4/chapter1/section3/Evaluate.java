@@ -9,8 +9,9 @@ public class Evaluate {
         Stack<Double> vals = new Stack<>();
         char[] ch = str.toCharArray();
         for (char c : ch) {
-            if (c == '(') ;
-            else if (c == '+') {
+            if (c == '(') {
+                ;
+            } else if (c == '+') {
                 ops.push(c);
             } else if (c == '-') {
                 ops.push(c);
